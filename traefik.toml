@@ -12,7 +12,7 @@ defaultEntryPoints = ["http", "https"]
     address = ":8080"
     [entryPoints.dashboard.auth]
       [entryPoints.dashboard.auth.basic]
-        users = ["admin:your_encrypted_password"]
+        users = ["admin:$apr1$MzjY4yJp$mvBaZJw0SuIY9z8SnA3cp."]
 
 [acme]
 email = "your_email@your_domain"
