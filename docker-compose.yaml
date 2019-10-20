@@ -7,7 +7,7 @@ networks:
 services:
   ingress:
     image: traefik:v1.7.18-alpine
-	restart: unless-stopped
+    restart: unless-stopped
 	labels:
 	  - traefik.enable=true
 	  - traefik.frontend.rule=Host:ingress.kaii.dev
