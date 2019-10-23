@@ -9,10 +9,11 @@ services:
     image: traefik:v1.7.18-alpine
     restart: unless-stopped
     labels:
+      - traefik.docker.network=mainstream
       - traefik.enable=true
-      - traefik.frontend.rule=Host:ingress.kaii.com
-      - traefik.port=8080
       - traefik.backend=dashboard
+      - traefik.port=8080      
+      - traefik.frontend.rule=Host:ingress.kaii.com
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.toml:/traefik.toml
