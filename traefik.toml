@@ -1,31 +1,41 @@
+debug = false
+
+logLevel = "ERROR"
 defaultEntryPoints = ["http", "https"]
 
+[log]
+[accessLog]
+
 [entryPoints]
-  [entryPoints.http]
+  [entryPoints.dashboard]
+    address = ":8080"
+    [entryPoints.dashboard.auth]
+      [entryPoints.dashboard.auth.basic]
+        users = ["admin:$apr1$MzjY4yJp$mvBaZJw0SuIY9z8SnA3cp."]
+[entryPoints.http]
     address = ":80"
       [entryPoints.http.redirect]
         entryPoint = "https"
   [entryPoints.https]
     address = ":443"
       [entryPoints.https.tls]
-  [entryPoints.dashboard]
-    address = ":8080"
-    [entryPoints.dashboard.auth]
-      [entryPoints.dashboard.auth.basic]
-        users = ["admin:$apr1$MzjY4yJp$mvBaZJw0SuIY9z8SnA3cp."]
+
+[retry]
+
+[api]
+entrypoint="dashboard"
 
 [acme]
-email = "your_email@your_domain"
+email = "srodriguez@kaii.com"
 storage = "acme.json"
 entryPoint = "https"
 onHostRule = true
   [acme.httpChallenge]
   entryPoint = "http"
 
-[api]
-entrypoint="dashboard"
-
 [docker]
+endpoint = "unix://var/run/docker.sock"
 domain = "kaii.com"
 watch = true
+exposedByDefault = false
 network = "ingress"
